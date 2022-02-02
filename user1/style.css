@@ -1,6 +1,10 @@
 * {
     font-family: "Roboto";
   }
+
+.hiden {
+  display: none;
+}
   
   p,
   h3,

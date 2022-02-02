@@ -36,20 +36,20 @@
     </div>
   </header>
   <main>
-    <section class="tests">
+    <section>
       <div class="container">
         <div class="row">
           <div class="col-3 tests-sidebar">
             <div class="sidebar-add-test">
-              <span>Themes</span><button id="activateAddTestButton"><img class="button" src="./img/add-icon.svg" alt=""></button>
+              <span class="sidebar-add-test__text">Themes</span><button id="activateAddTestButton"><img class="button" src="./img/add-icon.svg" alt=""></button>
             </div>
             <div class="row py-3 add-test-form" id="addTestForm" action="#">
+              <input class="col-auto add-test-form__input" type="text">
               <button class="col-auto add-test-form__button" type="submit">
                 <img src="./img/submit-icon.svg" alt="submit icon">
               </button>
-              <input class="col-auto add-test-form__input" type="text">
             </div>
-            <div class="tests">
+            <div class="tests" id="testThemes">
               <div class="tests__section">
                 <div class="row tests__item test-item" data-id="1">
                   <a class="col test-item__text" href="#">Java 2 Fundamentals</a>

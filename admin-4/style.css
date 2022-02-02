@@ -20,6 +20,7 @@ a {
   color: inherit;
 }
 
+
 .nav-link:hover, .nav-link.active {
   color: #17AC19;
 }
@@ -42,7 +43,10 @@ button {
   background: none;
 }
 
-.tests-sidebar {
+.sidebar-add-test__text {
+  font-size: 24px;
+  line-height: 24px;
+  color: #7A7A7A;
 }
 
 .add-test-form {
@@ -99,7 +103,21 @@ button {
   background: none;
 }
 
-.test__item.edit .test-text {
+.test-item__text {
+  font-size: 18px;
+  line-height: 25px;  
+  color: #0B0B0B;
+}
+
+.test-item__text:hover {
+  color: #007802;
+}
+
+.test-item__text:focus-visible {
+  border: none;
+}
+
+.test-item.edit .test-item__text {
   color: #F78F0F;
   border-bottom: 1px solid #F78F0F;
 }

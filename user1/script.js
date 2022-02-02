@@ -12,13 +12,13 @@ testThemeSelect.addEventListener('change', ({ target }) => {
 async function updateCurrentThemeData(themeName) {
     const formData = new FormData();
     formData.append('theme', themeName);
-    const response = await fetch('url', {
+    const response = await fetch('http://127.0.0.1:5500/for-java-project/user1/index.html', {
         method: 'POST',
         body: formData,
       });
-  
-    /* const result = await response.json(); */
-    const result = [{name: "Second test", description: "DescTest2"}, {name: "TherdNameTest", description: "DescT3"}];
+      
+    const result = await response.json();
+    
     updateTestsData(result)
 }
 
@@ -29,6 +29,7 @@ function updateTestsData(data) {
     }, '');
 
     testSelect.innerHTML = selectInner;
+    testSelect.classList.toggle('.hidden');
     updateDescription();
 }
 
@@ -37,4 +38,5 @@ testSelect.addEventListener('change', updateDescription)
 function updateDescription() {
     const testOptionValue = testSelect.value;
     testDescription.innerHTML = testsData[Number(testOptionValue)].description;
+    testDescription.classList.toggle('.hidden');
 }
