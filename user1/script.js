@@ -18,7 +18,7 @@ async function updateCurrentThemeData(themeName) {
         body: formData,
       });
 
-    const result = [{name: "Second test", description: "DescTest2"}, {name: "TherdNameTest", description: "DescT3"}];
+    const result = response.json();
     
     updateTestsData(result);
 }
