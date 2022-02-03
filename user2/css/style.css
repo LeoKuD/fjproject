@@ -76,6 +76,10 @@ a {
   background-color: #17ac19;
 }
 
+.limiter {
+  max-width: 1104px;
+}
+
 main {
   flex: 1;
 }
