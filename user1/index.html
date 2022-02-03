@@ -14,79 +14,68 @@
     <title>User1</title>
   </head>
   <body class="vh-100 d-flex flex-column">
-      <header>
-        <div class="container py-4">
-          <div class="row">
-            <div class="logo d-flex col-4 col-lg-2">
-              <a href="index.html">
-                <img
-                src="./img/logo.png"
-                alt="logo-dev-incubtor"
-                class="logo-img me-2"
-              />
-              </a>
-              <div class="d-flex flex-column">
-                <p>INCUBATOR</p>
-                <p>TESTING</p>
-              </div>
-            </div>
-
-            <ul
-              class="nav nav-header col-12 col-lg-4 justify-content-center order-lg-1 order-2"
-            >
-              <li><a href="#" class="nav-link link-primary">Assessment</a></li>
-              <li>
-                <a href="#" class="nav-link link-secondary">Statistics</a>
-              </li>
-            </ul>
-
-            <div
-              class="student d-flex justify-content-end align-items-center col-8 col-lg-6 order-lg-2 order-1 text-center"
-            >
-              <p>Student</p>
-              <i class="fas fa-circle"></i>
-              <p>Dmitriy Fedotov</p>
-              <img class="exit" src="./img/exit.png" alt="exit" />
+    <header>
+      <div class="container">
+        <nav class="row navbar navbar-expand-lg">
+          <a class="col-auto navbar-brand" href="#"><img src="./img/logo.svg"></a>
+          <div class="col d-flex justify-content-end">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <img src="./img//burger-icon.png">
+            </button>
+          </div>
+          <div class="col-12 col-lg-10">
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="col">
+                  <div class="col navbar-nav justify-content-evenly">
+                    <a class="nav-link active" aria-current="page" href="#">Assessment</a>
+                    <a class="nav-link" href="#">Statistics</a>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <span>User</span><span class="nav-separator mx-1 mb-1"></span><span>Dmitriy Fedotov</span><a class="ms-2" href="#"><img src="./img/logout.svg"></a>
+                </div>
             </div>
           </div>
-        </div>
-      </header>
+        </nav>
+      </div>
+    </header>
       <main class="flex-grow-1">
         <div class="container">
           <div class="title">
           <h1 class="start">To start testing choose theme and test</h1>
           </div>
-            <form action="./user2.html" class="row d-flex align-items-end py-3">
-              <div class="col-md-4 col-6">
-                <p>Select theme</p>
-                <select class="form-select h-100" id="testThemeSelect" aria-label="Default select example">
+            <form action="./user2.html" class="row gy-2">
+              <div class="col-12 col-lg-4">
+                <p class="select-label">Select theme</p>
+                <select class="form-select select-input" id="testThemeSelect" aria-label="Default select example">
                   <option selected>Open this select menu</option>
                   <option value="1">One</option>
                   <option value="2">Two</option>
                   <option value="3">Three</option>
                 </select>
               </div>
-              <div class="col-md-4 col-6">
-                <p>Select test</p>
-                <select class="form-select h-100" id="testSelect" aria-label="Default select example">
+              <div class="col-12 col-lg-4 hidden">
+                <p class="select-label">Select test</p>
+                <select class="form-select select-input" id="testSelect" aria-label="Default select example">
                   <option selected>Open this select menu</option>
                   <option value="1">One</option>
                   <option value="2">Two</option>
                   <option value="3">Three</option>
                 </select>
               </div>
-              <div class="col-md-4 col-12 pt-md-0 pt-3">
+              <div class="col-12 col-lg-4 d-flex flex-column justify-content-end hidden">
                 <button
-                type="submit"
-                class="btn btn-lg w-100"
-                id="startTestButton"
-              >
-                Start
-              </button>
-            </form>
-            </div>
-              <div class="border rounded p-2" id="testDescription">
+                  type="submit"
+                  class="mt-4 mt-lg-0 submit-button"
+                  id="startTestButton"
+                >
+                  Start
+                </button>
               </div>
+            </form>
+            <div class="test-description hidden" id="testDescription">
+            </div>
+          </div>
         </div>
       </main>
       <footer class="py-4"">

@@ -1,7 +1,8 @@
 const testThemeSelect = document.getElementById('testThemeSelect');
 const testSelect = document.getElementById('testSelect');
 const testDescription = document.getElementById('testDescription');
-const startTestButton = document.querySelector('startTestButton');
+const startTestButton = document.getElementById('startTestButton');
+
 let testsData = null;
 
 testThemeSelect.addEventListener('change', ({ target }) => {
@@ -16,27 +17,30 @@ async function updateCurrentThemeData(themeName) {
         method: 'POST',
         body: formData,
       });
-      
-    const result = await response.json();
+
+    const result = [{name: "Second test", description: "DescTest2"}, {name: "TherdNameTest", description: "DescT3"}];
     
-    updateTestsData(result)
+    updateTestsData(result);
 }
 
 function updateTestsData(data) {
     testsData = data;
     const selectInner = data.reduce((accum, { name }, index) => {
-        return accum + `<option value='${index}'>${name}</option>`;
+        return accum + `<option value='${name}' data-index=${index}>${name}</option>`;
     }, '');
 
     testSelect.innerHTML = selectInner;
-    testSelect.classList.toggle('.hidden');
+    testSelect.closest('div').classList.remove('hidden');
+    startTestButton.closest('div').classList.remove('hidden');
     updateDescription();
 }
 
 testSelect.addEventListener('change', updateDescription)
 
 function updateDescription() {
-    const testOptionValue = testSelect.value;
-    testDescription.innerHTML = testsData[Number(testOptionValue)].description;
-    testDescription.classList.toggle('.hidden');
+    const testOptionIndex = testSelect.querySelector('option:checked').dataset.index;
+    testDescription.innerHTML = testsData[Number(testOptionIndex)].description;
+    testDescription.closest('div').classList.remove('hidden');
 }
+
+
