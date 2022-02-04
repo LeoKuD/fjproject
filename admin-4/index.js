@@ -17,3 +17,17 @@ const addTestForm = document.getElementById('addTestForm');
 activateAddTestButton.addEventListener('click', () => {
     addTestForm.classList.toggle('active');
 })
+
+const detailList = document.getElementById('detailList');
+
+detailList.addEventListener('click', ({ target }) => {
+    if (target.closest('.question')) {
+        clickQuestionHandler(target);
+    }
+})
+
+function clickQuestionHandler(target) {
+    if(target.classList.contains('question__text')) {
+        target.closest('.question').classList.toggle('open')
+    }
+}

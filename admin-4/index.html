@@ -19,12 +19,12 @@
           </button>
         </div>
         <div class="col-12 col-lg-10">
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="collapse navbar-collapse w-100" id="navbarNavAltMarkup">
               <div class="col">
                 <div class="col navbar-nav justify-content-evenly">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
-                  <a class="nav-link" href="#">Features</a>
-                  <a class="nav-link" href="#">Pricing</a>
+                  <a class="nav-link active" aria-current="page" href="#">Users</a>
+                  <a class="nav-link" href="#">Tests</a>
+                  <a class="nav-link" href="#">Statistic</a>
                 </div>
               </div>
               <div class="col-auto">
@@ -59,12 +59,21 @@
                     <button><img src="./img/delete-icon.svg" alt=""></button>
                   </span>
                 </div>
+
+                <div class="row tests__item test-item" data-id="1">
+                  <a class="col test-item__text" href="#">Java 2 Fundamentals</a>
+                  <span class="col-auto test-item__control">
+                    <button class="test-item__submit"><img src="./img/submit-icon.svg" alt=""></button>
+                    <button class="test-item__edit"><img src="./img/edit-icon.svg" alt=""></button>
+                    <button><img src="./img/delete-icon.svg" alt=""></button>
+                  </span>
+                </div>
                 
               </div>
             </div>
           </div>
 
-          <div class="col-9 px-5">
+          <div class="col-9 detail">
             
               <h2 class="text-start detail__title">Java 2 Fundamentals</h2>
 
@@ -75,8 +84,8 @@
                 </button>
               </div>
 
-              <h3 class="mt-4 detail__list-title">List of tests</h3>
-              <div class="detail__list">
+              <h3 class="detail__list-title">List of tests</h3>
+              <div class="detail__list" id="detailList">
                 <div class="question">
                     <div class="row">
                       <a class="col question__text" data-bs-toggle="collapse" href="#test1" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -119,22 +128,22 @@
               <!-- Modal -->
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                  <div class="container modal-content p-4">
+                  <div class="container modal-content">
                     <div class="row">
                       <h5 class="col modal__title">New test</h5>
                       <button type="col-auto button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form class="row" action="">
+                    <form class="d-flex flex-column" action="">
                       <label>
                         <div>Name</div>
                         <input class="col-12 form-input" type="text">
                       </label>
                       <label>
-                        <div class="col-12">Description</div>
+                        <div class="">Description</div>
                         <textarea class="col-12 form-input" name="" id="" cols="30" rows="10">
                         </textarea>
                       </label>
-                      <div><button class="col-12 p-2 form-button" type="button">Submit</button></div>
+                      <button class="form-button" type="button">Submit</button>
                     </form>
                   </div>
                 </div>

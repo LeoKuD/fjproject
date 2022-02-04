@@ -7,9 +7,14 @@
 }
 
 header {
+  padding: 12px 0;
   font-size: 24px;
   color: #FAFAFA;
   background: #012438;
+}
+
+.container {
+  max-width: 1200px!important;
 }
 
 a {
@@ -34,13 +39,17 @@ a {
 }
 
 main {
-  padding-top: 61px;
+  padding-top: 68px;
   background: #FAFAFA;
 }
 
 button {
   border: none;
   background: none;
+}
+
+.tests-sidebar {
+  margin-top: 12px;
 }
 
 .sidebar-add-test__text {
@@ -84,6 +93,10 @@ button {
   font-size: 18px;
   line-height: 25px;
   color: #0B0B0B;
+}
+
+.tests__item:not(:first-child) {
+  margin-top: 27px;
 }
 
 .tests__item:hover .test-text, .test-text {
@@ -150,6 +163,10 @@ button {
   display: none;
 }
 
+.detail {
+  padding: 0 44px;
+}
+
 .detail__title {
   font-size: 30px;
   line-height: 36px;
@@ -208,6 +225,7 @@ button {
 }
 
 .form-input {
+  margin-top: 9px;
   padding: 6px 5px 6px 13px;
   border: 1px solid #C4C4C4;
   box-sizing: border-box;
@@ -217,11 +235,11 @@ button {
   color: #777777;
 }
 
-.question__text.collapsed ~ .question__add-button {
+.question:not(.open) .question__add-button {
   display: none;
 }
 
-.question__text:not(.collapsed) ~ .question__control {
+.question.open .question__control {
   display: none;
 }
 
@@ -232,14 +250,31 @@ button {
   color: #000000;
 }
 
+.modal-dialog {
+  max-width: 700px;
+}
+
+.modal-content {
+  padding: 30px 69.5px 47px 69.5px;
+  box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+
 .modal__title {
+  margin-bottom: 16px;
   font-size: 30px;
   line-height: 45px;
   color: #000000;
 }
 
 .form-button {
+  margin-top: 33px;
+  padding: 9px;
   background: #008F02;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
+  font-size: 24px;
+  line-height: 36px;
+  text-align: center;
+  color: #FAFAFA;
 }
