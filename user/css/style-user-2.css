@@ -76,7 +76,7 @@ a {
   background-color: #17ac19;
 }
 
-.limiter {
+.container {
   max-width: 1104px;
 }
 
@@ -116,6 +116,13 @@ main .title p {
 main .question {
   padding-top: 17px;
   padding-bottom: 30px;
+}
+main pre {
+  margin: 0;
+}
+main pre span {
+  font-size: 14px;
+  font-weight: 400;
 }
 main .answer {
   display: flex;
@@ -192,7 +199,8 @@ main input[type=checkbox]:checked + label:after {
 
 footer h3 {
   text-align: center;
-  padding: 32px 0;
+  padding: 24px 0;
+  font-weight: 500;
 }
 
 @media (max-width: 768px) {

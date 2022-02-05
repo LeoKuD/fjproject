@@ -1,0 +1,150 @@
+* {
+  font-family: "Roboto";
+}
+
+p,
+h3,
+h1 {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.container {
+  max-width: 1104px;
+}
+
+header {
+  font-size: 24px;
+  color: #fafafa;
+  background: #012438;
+}
+
+a {
+  text-decoration: none;
+}
+
+.nav-link {
+  color: inherit;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #17ac19;
+}
+
+.nav-separator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.nav-link {
+  color: inherit;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #17ac19;
+}
+
+.nav-separator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+main .statistic {
+  margin-top: 100px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  width: 900px;
+}
+main .title {
+  background-color: #f2f2f2;
+}
+main .title h1 {
+  font-size: 24px;
+  font-weight: 500;
+  color: #008f02;
+  text-align: center;
+  padding: 20px 0;
+}
+main .hr {
+  border: none;
+  height: 2px;
+  color: #008F02;
+  background-color: #008F02;
+  margin: 0 auto;
+  opacity: 1;
+  border-radius: 10px;
+  max-width: 800px;
+}
+main .table {
+  border-collapse: unset;
+  padding: 0 50px;
+}
+main .table th, main .table td {
+  font-size: 18px;
+  font-weight: 400;
+}
+main .table th:not(:nth-of-type(2)) {
+  padding-top: 43px;
+  padding-bottom: 11px;
+  text-align: center;
+}
+main .table td {
+  padding-top: 18px;
+  padding-bottom: 18px;
+  text-align: center;
+}
+main img {
+  cursor: pointer;
+  width: 24px;
+  height: 13px;
+}
+main tr > th:last-of-type {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main tr td:nth-of-type(2) {
+  text-align: left;
+}
+main tr:last-of-type {
+  border: transparent;
+}
+
+footer h3 {
+  text-align: center;
+  padding: 480px 0 24px 0;
+  font-weight: 500;
+}
+
+.sort {
+  transition: 0.2s;
+}
+
+.down {
+  transform: rotate(0.5turn);
+}
+
+@media (max-width: 960px) {
+  main .statistic, main .hr {
+    max-width: 90%;
+  }
+}

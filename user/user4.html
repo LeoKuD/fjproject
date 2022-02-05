@@ -10,50 +10,37 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/style-user-4.css" />
     <title>User4</title>
   </head>
-  <body class="vh-100 d-flex flex-column">
-      <header>
-        <div class="container py-4">
-          <div class="row">
-            <div class="logo d-flex col-4 col-lg-2">
-              <a href="index.html">
-                <img
-                src="./img/logo.png"
-                alt="logo-dev-incubtor"
-                class="logo-img me-2"
-              />
-              </a>
-              <div class="d-flex flex-column">
-                <p>INCUBATOR</p>
-                <p>TESTING</p>
+  <body">
+  <header>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg">
+        <a class="col-auto navbar-brand" href="#"><img src="./img/logo.svg"></a>
+        <div class="col d-flex justify-content-end">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <img src="./img//burger-icon.png">
+          </button>
+        </div>
+        <div class="col-12 col-lg-10">
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="col">
+                <div class="col navbar-nav justify-content-evenly">
+                  <a class="nav-link active" href="#">Assessment</a>
+                  <a class="nav-link" href="#">Statistics</a>
+                </div>
               </div>
-            </div>
-
-            <ul
-              class="nav nav-header col-12 col-lg-4 justify-content-center order-lg-1 order-2"
-            >
-              <li><a href="#" class="nav-link link-primary">Assessment</a></li>
-              <li>
-                <a href="#" class="nav-link link-secondary">Statistics</a>
-              </li>
-            </ul>
-
-            <div
-              class="student d-flex justify-content-end align-items-center col-8 col-lg-6 order-lg-2 order-1 text-center"
-            >
-              <p>Student</p>
-              <i class="fas fa-circle"></i>
-              <p>Dmitriy Fedotov</p>
-              <img class="exit" src="./img/exit.png" alt="exit" />
-            </div>
+              <div class="col-auto">
+                <span>Student</span><span class="nav-separator mx-1 mb-1"></span><span>Dmitriy Fedotov</span><a class="ms-2" href="#"><img src="./img/logout.svg"></a>
+              </div>
           </div>
         </div>
-      </header>
-      <main class="flex-grow-1">
+      </nav>
+    </div>
+  </header>
+      <main>
         <div class="container">
-          <div class="row">
             <div class="title">
               <h1>Topic 1. Basic Structure of Java Program</h1>
               <span class="ps-2">/</span>
@@ -71,14 +58,13 @@
               <div class="count-answers"><p>Correct answers</p><p>55</p></div>
               <div class="count-answers"><p>Wrong answers</p><p>20</p></div>
             </div>
-            <button onclick="location.href='user5.html'"
+            <button
             type="submit"
-            class="btn btn-lg w-100 flex-shrink-1 m-5"
+            class="btn"
           >
           Show all my statistic
           </button>
           </div>
-        </div>
       </main>
       <footer class="py-4"">
         <h3 class="text-center">© Dev Incubator</h3>
