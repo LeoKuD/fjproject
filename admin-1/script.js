@@ -12,7 +12,7 @@ const result = {
     }
   };
 
-
+/* const userDeleteForm =  */
 const usersList = document.querySelector('.users__list');
 const openCreateModalButton = document.getElementById('openCreateModalButton');
 const createUserModal = document.querySelector('.createUserModal__body');
@@ -23,40 +23,49 @@ const modalUserRoleOptions = modalUserRole.innerHTML;
 const modalUserLogin = document.getElementById('modalUserLogin');
 const modalUserPasswordLabel = document.getElementById('modalUserPasswordLabel');
 const modalTitle = document.querySelector('.createUserModal__title');
+const userDeleteForm = document.getElementById('userDeleteForm');
 let editMode = false;
 let hiddenInput = null;
+let deletedUserId = null;
 
 function getHiddenInput(id) {
     const label = document.createElement('label');
-    label.innerHTML = `<input type="hidden"  value=${id} id="hiddenInput"/>`;
+    label.innerHTML = `<input type="hidden" name="userId" value=${id} id="hiddenInput"/>`;
     hiddenInput = label;
     return label;
 }
 
 function setUserDataInForm({ userId, firstName, lastName, login, role: { rolesList, currentRole} }) {
     editMode = true;
-    createUserModal.appendChild(getHiddenInput(userId))
+    createUserModal.appendChild(getHiddenInput(userId));
     modalUserName.value = firstName;
     modalUserSurname.value = lastName;
     modalUserRole.innerHTML = rolesList.reduce( (accum, role) => {
         return accum += `<option ${role === currentRole ? 'selected' : ''}>${role}</option>`
     }, '');
     modalUserLogin.value = login;
-    modalUserPasswordLabel.remove();
     openCreateModalButton.click();
 }
 
 async function getEditUserData(userId) {
     /* const response = await fetch('Your url with user id');
-    const result = response.json(); */
+    const result = await response.json();
+    console.log(result) */
     setUserDataInForm(result)
 }
 
 usersList.addEventListener('click', ( { target }) => {
-    if (target.closest('.user-info__button')) {
+    if (target.closest('.user-info__button_edit')) {
         const userId = target.closest('.user-info').dataset.id;
         getEditUserData(userId);
     }
+    if (target.closest('.user-info__button_delete')) {
+        deletedUserId =  target.closest('.user-info').dataset.id;
+    }
+})
+
+userDeleteForm.addEventListener('submit', () => {
+    userDeleteForm.prepend(getHiddenInput(deletedUserId))
 })
 
 function refreshUserModal() {
