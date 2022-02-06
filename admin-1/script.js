@@ -45,6 +45,7 @@ function setUserDataInForm({ userId, firstName, lastName, login, role: { rolesLi
     }, '');
     modalUserLogin.value = login;
     modalUserPasswordInput.removeAttribute('required');
+    createUserModal.setAttribute('action', '/updateUser');
     openCreateModalButton.click();
 }
 
@@ -70,7 +71,6 @@ userDeleteForm.addEventListener('submit', () => {
 })
 
 function refreshUserModal() {
-    console.log('Refrexh')
     editMode = false;
     modalUserName.value = '';
     modalUserSurname.value = '';
@@ -78,6 +78,7 @@ function refreshUserModal() {
     modalUserLogin.value = '';
     hiddenInput.remove();
     modalUserPasswordInput.setAttribute('required', '');
+    createUserModal.setAttribute('action', '/addUser');
     editMode = false;
 }
 
