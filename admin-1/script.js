@@ -21,7 +21,7 @@ const modalUserSurname = document.getElementById('modalUserSurname');
 const modalUserRole = document.getElementById('modalUserRole');
 const modalUserRoleOptions = modalUserRole.innerHTML;
 const modalUserLogin = document.getElementById('modalUserLogin');
-const modalUserPasswordLabel = document.getElementById('modalUserPasswordLabel');
+const modalUserPasswordInput = document.getElementById('modalUserPassword');
 const modalTitle = document.querySelector('.createUserModal__title');
 const userDeleteForm = document.getElementById('userDeleteForm');
 let editMode = false;
@@ -44,6 +44,7 @@ function setUserDataInForm({ userId, firstName, lastName, login, role: { rolesLi
         return accum += `<option ${role === currentRole ? 'selected' : ''}>${role}</option>`
     }, '');
     modalUserLogin.value = login;
+    modalUserPasswordInput.removeAttribute('required');
     openCreateModalButton.click();
 }
 
@@ -69,13 +70,14 @@ userDeleteForm.addEventListener('submit', () => {
 })
 
 function refreshUserModal() {
+    console.log('Refrexh')
     editMode = false;
     modalUserName.value = '';
     modalUserSurname.value = '';
     modalUserRole.innerHTML = modalUserRoleOptions;
     modalUserLogin.value = '';
-    createUserModal.insertBefore(modalUserPasswordLabel, modalUserLogin.closest('label').nextElementSibling);
     hiddenInput.remove();
+    modalUserPasswordInput.setAttribute('required', '');
     editMode = false;
 }
 
