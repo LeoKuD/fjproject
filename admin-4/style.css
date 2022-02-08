@@ -225,6 +225,12 @@ button {
   border-radius: 10px;
 }
 
+.question__title {
+  font-size: 24px;
+  line-height: 36px;
+  color: #008F02;
+}
+
 .detail__list .question:not(:first-child) {
   margin-top: 45px;
 }
@@ -252,7 +258,6 @@ button {
 }
 
 .form-input {
-  margin-top: 9px;
   padding: 6px 5px 6px 13px;
   border: 1px solid #C4C4C4;
   box-sizing: border-box;
@@ -268,6 +273,22 @@ button {
 
 .question.open .question__control {
   display: none;
+}
+
+.question-modal__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px 0;
+}
+
+.answer:not(:first-child) {
+  margin-top: 20px;
+}
+
+.answer__title {
+  font-size: 20px;
+  line-height: 36px;
+  color: #008F02
 }
 
 .footer__copyright {
@@ -292,6 +313,10 @@ button {
   font-size: 30px;
   line-height: 45px;
   color: #000000;
+}
+
+.modal__description {
+  margin-top: 22px;
 }
 
 .form-button {

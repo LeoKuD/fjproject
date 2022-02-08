@@ -37,6 +37,29 @@ const dataByTopicId =
   }
 ];
 
+const questionData = {
+    "questionId": 2,
+    "description": "1st quest for test2",
+    "answerDTOList": [
+      {
+        "answerId": 1,
+        "description": "1AnswFor2",
+        "correct": false
+      },
+      {
+        "answerId": 2,
+        "description": "2AnswFor2",
+        "correct": true
+      },
+      {
+        "answerId": 3,
+        "description": "3AnsFor2",
+        "correct": false
+      }
+    ]
+};
+
+
 
 
 function getQuestionHtml({ name, description, testId, questions }) {
@@ -56,16 +79,16 @@ function getQuestionHtml({ name, description, testId, questions }) {
     </div>
     <div class="collapse question__list" id=test${testId}>
       ${
-        questions.reduce( (accum, { questionId, description }) => {
+        questions.reduce( (accum, { questionId, description }, index) => {
           return accum += (`
             <div class="row align-items-center question__item" data-id=${questionId}>
-              <span class="col-auto">1</span>
+              <span class="col-auto">${index + 1}</span>
               <textarea class="col form-input" type="text" readonly="">
                 ${description}
               </textarea>
               <div class="col-auto question-control">
-                <button><img src="./img/edit-icon.svg" alt="Edit test question"></button>
-                <button><img src="./img/delete-icon.svg" alt="Delete test question"></button>
+                <button class='question__edit-button' data-bs-toggle="modal" data-bs-target="#questionModal"><img src="./img/edit-icon.svg" alt="Edit test question"></button>
+                <button class='question__delete-button'><img src="./img/delete-icon.svg" alt="Delete test question"></button>
               </div>
             </div>
           `)
@@ -99,10 +122,14 @@ function deactivateAddThemeForm() {
   addThemeForm.classList.remove('active');
 }
 
+let result = null;
+
 async function getTestsData(themeId) {
  // const response = await fetch(/* 'Your url' */);
-  //const result = await response.json();
-  return dataByTopicId;
+  //result = await response.json();
+  result = dataByTopicId;
+
+  return result;
 }
 
 async function setNewThemeTests(themeId) {
@@ -167,33 +194,93 @@ function refreshThemesValues() {
   prevEditedThemeValue = null;
 }
 
-const prevQuestion = null;
+let prevQuestion = null;
+const questionFormQuestion = document.getElementById('questionFormQuestion');
+const activateAddTestButton = document.getElementById('activateAddTestButton');
+const addTestForm = document.getElementById('addTestForm');
+const addAnswerButton = document.getElementById('addAnswerButton');
+const createQuestionForm = document.getElementById('createQuestionForm');
+const questionFormAnswerField = document.getElementById('questionFormAnswerField');
+console.log(questionFormAnswerField)
+/* activateAddTestButton.addEventListener('click', () => {
+    addTestForm.classList.toggle('active');
+}) */
+
+function refreshQuestionForm() {
+  questionFormQuestion.textContent = '';
+  questionFormAnswerField.textContent = '';
+}
+
+function openQuestionCreateForm() {
+  refreshQuestionForm();
+}
+
+function openQuestionEditForm( { questionId, description, answerDTOList }) {
+  refreshQuestionForm();
+  questionFormQuestion.textContent = description;
+  answerDTOList.forEach( itemData => {
+    questionFormAnswerField.append((getNewAnswerField(itemData)));
+  })
+}
+
+async function editQuestion(id) {
+  /* const response = await fetch()
+  const questionData = await response.json(); */
+  openQuestionEditForm(questionData);
+}
 
 function detailClickHandler(target) {
   const question = target.closest('.question');
   if (question) {
     const questionId = question.dataset.id;
-    console.log(questionId)
+    if (target.closest('.question__edit-button')) {
+      editQuestion(questionId)
+    } else if (target.closest('.question__delete-button')) {
+      console.log('delete')
+    }
   }
 }
 
+function getNewAnswerField(data) {
+  const nextAnswerNumber = questionFormAnswerField.childNodes.length;
+  const answer = document.createElement('label');
+  answer.className = 'answer';
+  const description = data ? data.description : '';
+  const correct = data ? data.correct : false;
+  answer.innerHTML = `
+    <div class="row align-items-center">
+      <div class="col-auto answer__title">Answer ${nextAnswerNumber + 1}</div>
+      <input class="col-auto" type="checkbox" ${correct ? 'checked' : ''}>
+    </div>
+    <div class="row align-items-center">
+      <input class="col form-input" type="text" value="${description}" placeholder="write answer"  required>
+      <button class="col-auto answer__delete-button" type="button"><img src="./img/delete-icon.svg"></button>
+    </div>
 
+  `;
 
+  return answer;
+}
 
-const activateAddTestButton = document.getElementById('activateAddTestButton');
-const addTestForm = document.getElementById('addTestForm');
-const addAnswerButton = document.getElementById('addAnswerButton');
+function createNewQuestion() {
+  questionFormAnswerField.append(getNewAnswerField());
+}
 
-/* activateAddTestButton.addEventListener('click', () => {
-    addTestForm.classList.toggle('active');
-}) */
+createQuestionForm.addEventListener('click', ({ target }) => {
+  if (target.closest('.add-answer-button')) {
+    createNewQuestion()
+  } else if (target.closest('.answer__delete-button')) {
+    target.closest('.answer').remove();
+  }
+})
+
 
 function clickQuestionHandler(target) {
   if(target.classList.contains('question__text')) {
-    target.closest('.question').classList.toggle('open')
-  } else if(target.closest('.question__add-button')) {
-    console.log('button')
-  }
+    target.closest('.question').classList.toggle('open');
+  } else if (target.closest('.question__add-button')) {
+    openQuestionCreateForm();
+  } 
 }
 
 detailList.addEventListener('click', ({ target }) => {
@@ -202,7 +289,4 @@ detailList.addEventListener('click', ({ target }) => {
   }
 })
 
-addAnswerButton.addEventListener('click', () => {
-  console.log('hello')
-})
 

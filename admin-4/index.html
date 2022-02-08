@@ -110,8 +110,8 @@
             <div>Name</div>
             <input class="col-12 form-input" type="text">
           </label>
-          <label>
-            <div class="">Description</div>
+          <label class="modal__description">
+            <div>Description</div>
             <textarea class="col-12 form-input" name="" id="" cols="30" rows="10">
             </textarea>
           </label>
@@ -123,43 +123,28 @@
 
 
   <!-- Question Modal -->
-  <div class="modal fade" id="questionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade question-modal" id="questionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="container modal-content">
         <div class="row">
           <button type="col-auto button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form class="d-flex flex-column" action="">
-          <label>
-            <div>Question</div>
-            <textarea class="col-12 form-input" name="" id="" cols="30" rows="10">
-<!--               Каким будет результат выполнения следующего кода?
-                  public class xyz {
-                    public static void main(String args[]) {
-                      for(int i = 0; i < 2; i++) {
-                        for(int j = 2; j>= 0; j--) {
-                          if(i == j) break;
-                          System.out.println("i=" + i + " j=" + j);
-                        }
-                      }
-                    }
-                  } -->
+        <form class="d-flex flex-column" id="createQuestionForm" action="">
+          <label >
+            <div class="question__title">Question</div>
+            <textarea class="col-12 form-input" name="" id="questionFormQuestion" cols="30" rows="10">
             </textarea>
           </label>
-          <label>
-            <div class="row">
-              <div class="col-auto">Answer</div>
-              <input class="col-auto" type="checkbox">
-            </div>
-            <input class="col-12 form-input" type="text" value="Some value">
-          </label>
+          <div class="row" id="questionFormAnswerField">
+
+          </div>
 
           <div class="row">
-            <button class="col-auto d-flex align-items-center" id="addAnswerButton">
+            <button type="button" class="col-auto d-flex align-items-center add-answer-button">
               <img src="./img/add-icon.svg" alt="">
               <span> Add new question</span>
             </button>
-            <button class="col form-button" type="button">Submit</button>
+            <button class="col form-button" type="submit">Submit</button>
           </div>
         </form>
       </div>
