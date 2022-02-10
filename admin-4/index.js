@@ -1,4 +1,3 @@
-//let dataByTopicId = null;
 const dataByTopicId = 
 [
   {
@@ -102,6 +101,7 @@ const addThemeFormInput = document.querySelector('.add-theme-form__input');
 let prevEditedTheme = null;
 let prevEditedThemeValue = null;
 let currentThemeId = null;
+const themeSection = document.querySelector('.theme__section');
 
 function changeActiveAddThemeFormStatus() {
   addThemeForm.classList.toggle('active');
@@ -125,8 +125,11 @@ addThemeForm.addEventListener('submit', async () => {
     const url = new URL("http://localhost:8080/editUser/addTopic");
     const params = {name: newThemeValue};
     url.search = new URLSearchParams(params).toString();
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: 'POST'
+    });
     const result = await response.json();
+    updateThemesList(result);
   }
 })
 
@@ -156,6 +159,27 @@ async function setNewThemeTests(data) {
   })
 }
 
+/* topicData = [{"topicName":"Second topic","topicId":2},{"topicName":"Third name","topicId":3},{"topicName":"name","topicId":6},{"topicName":"name1","topicId":7},{"topicName":"JavaTopic","topicId":8},{"topicName":"First topics","topicId":1},{"topicName":"DOTNET","topicId":9}]; */
+
+function updateThemesList(data) {
+  console.log(data)
+  themeSection.innerHTML = '';
+  themeSection.innerHTML = `
+    ${data.map( ({ topicName, topicId }) => {
+      return `
+      <div class="row theme__item theme-item" data-id=${topicId}>
+        <input class="col theme-item__input" value=${topicName} readonly="">
+        <span class="col-auto theme-item__control">
+          <button class="theme-item__submit"><img src="./img/submit-icon.svg" alt=""></button>
+          <button class="theme-item__edit"><img src="./img/edit-icon.svg" alt=""></button>
+          <button class="theme-item__delete"><img src="./img/delete-icon.svg" alt=""></button>
+        </span>
+      </div>
+      `
+    }).join('')}
+  `
+}
+
 async function submitNewTheme(target) {
   const themeItem = target.closest('.theme__item');
   const themeId = themeItem.dataset.id;
@@ -165,6 +189,7 @@ async function submitNewTheme(target) {
   url.search = new URLSearchParams(params).toString();
   const response = await fetch(url);
   const result = await response.json();
+  updateThemesList(result);
 }
 
 async function deleteTheme(target) {
@@ -175,6 +200,7 @@ async function deleteTheme(target) {
   url.search = new URLSearchParams(params).toString();
   const response = await fetch(url);
   const result = await response.json();
+  updateThemesList(result);
 }
 
 function testThemeClichHandler(target) {
