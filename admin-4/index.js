@@ -244,14 +244,22 @@ async function editTest(name, description) {
   const response = await fetch(url);
   const result = await response.json();
   setNewThemeTests(result);
- }
+}
+
+async function deleteTest() {
+  const url = new URL("http://localhost:8080/removeTest");
+  let params = {topicId: currentThemeId, testId: currentTestId};
+  url.search = new URLSearchParams(params).toString();
+  const response = await fetch(url);
+  const result = await response.json();
+  setNewThemeTests(result);
+}
 
 createNewTestForm.addEventListener('submit', (event) => {
   event.preventDefault();
   const formData = new FormData(createNewTestForm);
   const testName = formData.get('testName');
   const testDescription = formData.get('testDescription');
-  console.log(isNewTest)
   if (isNewTest) {
     addNewTest(testName, testDescription);
   } else {
@@ -333,15 +341,13 @@ let currentTestId = null;
 let currentQuestionId = null;
 let isNewTest = true;
 const createNewTestButton = document.getElementById('createNewTestButton');
-
-function openTestCreateForm(event) {
-  console.log('Test create')
-}
+const questionModalCloseButton = document.getElementById('questionModalCloseButton');
 
 async function addNewQuestion() {
   let data = null;
   let url = null;
   const formData = new FormData(createQuestionForm);
+  const questionName = formData.get('question');
   const answersData = Array.from(questionFormAnswerField.querySelectorAll('.answer')).map(answer => {
     return {
       correct: answer.querySelector('[name=correct]:checked') ? true : false,
@@ -350,31 +356,34 @@ async function addNewQuestion() {
   });
 
   if (isNewQuestion) {
-    console.log('New')
     url = '/addQuestion'
     data = {
+      questionName,
       topicId: currentThemeId,
       testId: currentTestId,
       answersData,
     }
   } else {
-    console.log('old')
     url = '/editQuestion'
     data = {
+      questionName,
       topicId: currentThemeId,
       questionId: currentQuestionId,
       answersData,
     }
   }
   isNewQuestion = false;
-  fetch(url, {
+  const response = await fetch(url, {
     method: 'POST',
     body: JSON.stringify(data),
-  })
+  });
+  const result = await response.json();
+  setNewThemeTests(result);
 }
 
 createQuestionForm.addEventListener('submit', (event) => {
   event.preventDefault();
+  questionModalCloseButton.click();
   addNewQuestion();
 })
 
@@ -442,16 +451,21 @@ function setCurrentQuestionId(target) {
   console.log('Set current questionId', currentQuestionId);
 }
 
+async function deleteQuestion(id) {
+  console.log('delete question')
+}
+
 function questionClickHandler(target) {
   if (target.closest('.question__edit-button')) {
     setCurrentQuestionId(target);
     editQuestion();
   } else if (target.closest('.question__delete-button')) {
-    console.log('delete')
+    deleteQuestion()
   }
 }
 
 function detailClickHandler(target) {
+  console.log()
   if (target.closest('.question__item')) {
     questionClickHandler(target);
   } 
@@ -477,9 +491,13 @@ function clickTestHandler(target) {
     target.closest('.test').classList.toggle('open');
   } else if (target.closest('.test__add-button')) {
     openQuestionCreateForm();
+    createQuestionForm.reset();
   }  else if (target.closest('.test__edit-button')) {
     isNewTest = false;
     createNewTestButton.click();
+  }
+  else if (target.closest('.test__delete-button')) {
+    deleteTest();
   }
 }
 
