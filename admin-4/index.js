@@ -136,12 +136,11 @@ addThemeForm.addEventListener('submit', async () => {
 let result = null;
 
 async function getTestsData(themeId) {
- // const response = await fetch(/* 'Your url' */);
-  //result = await response.json();
-  //dataByTopicId = result;
-  result = dataByTopicId;
-
-  return result;
+ /*  const response = await fetch();
+  result = await response.json();
+  dataByTopicId = result; */
+  return dataByTopicId
+  /* return result; */
 }
 
 async function setNewThemeTests(data) {
@@ -228,25 +227,23 @@ const createNewTestForm = document.getElementById('newTestForm');
 const newTestFormCloseButton = document.getElementById('newTestFormCloseButton');
 
 async function addNewTest(name, description) {
- /*  const url = new URL("http://localhost:8080/addTest");
+  newTestFormCloseButton.click();
+  const url = new URL("http://localhost:8080/addTest");
   let params = {name, description, topicId: currentThemeId};
   url.search = new URLSearchParams(params).toString();
   const response = await fetch(url);
-  const result = await response.json(); */
-  result = dataByTopicId;
+  const result = await response.json();
   setNewThemeTests(result);
-  newTestFormCloseButton.click();
 }
 
 async function editTest(name, description) {
-  /*  const url = new URL("http://localhost:8080/editTest");
-   let params = {name, description, topicId: currentThemeId, testId: currentTestId};
-   url.search = new URLSearchParams(params).toString();
-   const response = await fetch(url);
-   const result = await response.json(); */
-   result = dataByTopicId;
-   setNewThemeTests(result);
-   newTestFormCloseButton.click();
+  newTestFormCloseButton.click();
+  const url = new URL("http://localhost:8080/editTest");
+  let params = {name, description, topicId: currentThemeId, testId: currentTestId};
+  url.search = new URLSearchParams(params).toString();
+  const response = await fetch(url);
+  const result = await response.json();
+  setNewThemeTests(result);
  }
 
 createNewTestForm.addEventListener('submit', (event) => {
@@ -254,8 +251,12 @@ createNewTestForm.addEventListener('submit', (event) => {
   const formData = new FormData(createNewTestForm);
   const testName = formData.get('testName');
   const testDescription = formData.get('testDescription');
-  addNewTest(testName, testDescription);
-  editTest(testName, testDescription);
+  console.log(isNewTest)
+  if (isNewTest) {
+    addNewTest(testName, testDescription);
+  } else {
+    editTest(testName, testDescription);
+  }
   createNewTestForm.reset();
 });
 
@@ -267,18 +268,23 @@ function setCreateTestFormStartData() {
   createNewTestForm.querySelector('[name=testDescription]').value = description;
 }
 
-function createTestClickHandler(target) {
+function createTestClickHandler(event) {
+  const { target, isTrusted } = event;
+  console.log(event)
   const openFormButton = target.closest('#createNewTestButton');
   if (openFormButton) {
     createNewTestForm.reset();
   }
-  if (!isNewTest) {
-    setCreateTestFormStartData()
+  if (!isTrusted) {
+    setCreateTestFormStartData();
+    isNewTest = false;
+  } else {
+    isNewTest = true;
   }
-  isNewTest = true;
 }
 
-document.addEventListener('click', ({ target }) => {
+document.addEventListener('click', (event) => {
+  const { target } = event;
   const targetClassList = target.classList;
   if (target.closest('#testThemes')) {
    testThemeClichHandler(target);
@@ -286,7 +292,7 @@ document.addEventListener('click', ({ target }) => {
   } else if (target.closest('.sidebar-add-theme')) {
     addThemeClickHandler(target);
   } else if (target.closest('.detail__create')) {
-    createTestClickHandler(target)
+    createTestClickHandler(event);
   }
   else if(target.closest('#detailList')) {
    refreshThemesValues();
@@ -412,7 +418,7 @@ function openQuestionEditForm( { questionId, description, answerDTOList }) {
 
 function getAnswers(questionId) {
   /*  const url = new URL('/getAnswers');
-  const params = {id};
+  const params = {id: questionId};
   url.search = new URLSearchParams(params).toString();
   response = await fetch(url);
   const result = await response.json(); */
