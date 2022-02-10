@@ -57,16 +57,16 @@
                     <span class="col-auto theme-item__control">
                       <button class="theme-item__submit"><img src="./img/submit-icon.svg" alt=""></button>
                       <button class="theme-item__edit"><img src="./img/edit-icon.svg" alt=""></button>
-                      <button><img src="./img/delete-icon.svg" alt=""></button>
+                      <button class="theme-item__delete"><img src="./img/delete-icon.svg" alt=""></button>
                     </span>
                   </div>
     
-                  <div class="row theme__item theme-item" data-id="2">
-                    <input class="col theme-item__input" value="JavaScript" readonly>
+                  <div class="row theme__item theme-item" data-id="1">
+                    <input class="col theme-item__input" value="Java Script" readonly>
                     <span class="col-auto theme-item__control">
                       <button class="theme-item__submit"><img src="./img/submit-icon.svg" alt=""></button>
                       <button class="theme-item__edit"><img src="./img/edit-icon.svg" alt=""></button>
-                      <button><img src="./img/delete-icon.svg" alt=""></button>
+                      <button class="theme-item__delete"><img src="./img/delete-icon.svg" alt=""></button>
                     </span>
                   </div>
                   
@@ -74,10 +74,10 @@
               </div>
             </div>
     
-            <div class="col-9 detail">
+            <div class="col-9 detail" id="detail">
               <h2 class="text-start detail__title">Java 2 Fundamentals</h2>
               <div class="align-items-center detail__create">
-                    <button type="button" class="row detail-card__add-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="row detail-card__add-button" id="createNewTestButton" data-bs-toggle="modal" data-bs-target="#exampleModal">
                       <img class="col-auto" src="./img/add-icon.svg" alt="add new test">
                       <span class="col-auto detail-card__text">Create new test</span>
                     </button>
@@ -103,19 +103,18 @@
       <div class="container modal-content">
         <div class="row">
           <h5 class="col modal__title">New test</h5>
-          <button type="col-auto button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button id="newTestFormCloseButton" type="col-auto button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form class="d-flex flex-column" action="">
+        <form class="d-flex flex-column" action="" id="newTestForm">
           <label>
             <div>Name</div>
-            <input class="col-12 form-input" type="text">
+            <input class="col-12 form-input" name="testName" type="text" required>
           </label>
           <label class="modal__description">
             <div>Description</div>
-            <textarea class="col-12 form-input" name="" id="" cols="30" rows="10">
-            </textarea>
+            <textarea class="col-12 form-input" name="testDescription" id="" cols="30" rows="10" required></textarea>
           </label>
-          <button class="form-button" type="button">Submit</button>
+          <button class="form-button" type="submit">Submit</button>
         </form>
       </div>
     </div>
@@ -132,7 +131,7 @@
         <form class="d-flex flex-column" id="createQuestionForm" action="">
           <label >
             <div class="question__title">Question</div>
-            <textarea class="col-12 form-input" name="" id="questionFormQuestion" cols="30" rows="10">
+            <textarea class="col-12 form-input" name="question" id="questionFormQuestion" cols="30" rows="10">
             </textarea>
           </label>
           <div class="row" id="questionFormAnswerField">
