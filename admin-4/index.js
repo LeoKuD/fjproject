@@ -251,7 +251,6 @@ createNewTestForm.addEventListener('submit', (event) => {
   const formData = new FormData(createNewTestForm);
   const testName = formData.get('testName');
   const testDescription = formData.get('testDescription');
-  console.log(isNewTest)
   if (isNewTest) {
     addNewTest(testName, testDescription);
   } else {
@@ -334,14 +333,11 @@ let currentQuestionId = null;
 let isNewTest = true;
 const createNewTestButton = document.getElementById('createNewTestButton');
 
-function openTestCreateForm(event) {
-  console.log('Test create')
-}
-
 async function addNewQuestion() {
   let data = null;
   let url = null;
   const formData = new FormData(createQuestionForm);
+  const questionName = formData.get('question');
   const answersData = Array.from(questionFormAnswerField.querySelectorAll('.answer')).map(answer => {
     return {
       correct: answer.querySelector('[name=correct]:checked') ? true : false,
@@ -350,27 +346,29 @@ async function addNewQuestion() {
   });
 
   if (isNewQuestion) {
-    console.log('New')
     url = '/addQuestion'
     data = {
+      questionName,
       topicId: currentThemeId,
       testId: currentTestId,
       answersData,
     }
   } else {
-    console.log('old')
     url = '/editQuestion'
     data = {
+      questionName,
       topicId: currentThemeId,
       questionId: currentQuestionId,
       answersData,
     }
   }
   isNewQuestion = false;
-  fetch(url, {
+  const response = await fetch(url, {
     method: 'POST',
     body: JSON.stringify(data),
-  })
+  });
+  const result = await response.json();
+  setNewThemeTests(result);
 }
 
 createQuestionForm.addEventListener('submit', (event) => {
