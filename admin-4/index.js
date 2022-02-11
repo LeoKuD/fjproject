@@ -136,12 +136,11 @@ addThemeForm.addEventListener('submit', async () => {
 let result = null;
 
 async function getTestsData(themeId) {
- // const response = await fetch(/* 'Your url' */);
-  //result = await response.json();
-  //dataByTopicId = result;
-  result = dataByTopicId;
-
-  return result;
+ /*  const response = await fetch();
+  result = await response.json();
+  dataByTopicId = result; */
+  return dataByTopicId
+  /* return result; */
 }
 
 async function setNewThemeTests(data) {
@@ -228,34 +227,44 @@ const createNewTestForm = document.getElementById('newTestForm');
 const newTestFormCloseButton = document.getElementById('newTestFormCloseButton');
 
 async function addNewTest(name, description) {
- /*  const url = new URL("http://localhost:8080/addTest");
+  newTestFormCloseButton.click();
+  const url = new URL("http://localhost:8080/addTest");
   let params = {name, description, topicId: currentThemeId};
   url.search = new URLSearchParams(params).toString();
   const response = await fetch(url);
-  const result = await response.json(); */
-  result = dataByTopicId;
+  const result = await response.json();
   setNewThemeTests(result);
-  newTestFormCloseButton.click();
 }
 
 async function editTest(name, description) {
-  /*  const url = new URL("http://localhost:8080/editTest");
-   let params = {name, description, topicId: currentThemeId, testId: currentTestId};
-   url.search = new URLSearchParams(params).toString();
-   const response = await fetch(url);
-   const result = await response.json(); */
-   result = dataByTopicId;
-   setNewThemeTests(result);
-   newTestFormCloseButton.click();
- }
+  newTestFormCloseButton.click();
+  const url = new URL("http://localhost:8080/editTest");
+  let params = {name, description, topicId: currentThemeId, testId: currentTestId};
+  url.search = new URLSearchParams(params).toString();
+  const response = await fetch(url);
+  const result = await response.json();
+  setNewThemeTests(result);
+}
+
+async function deleteTest() {
+  const url = new URL("http://localhost:8080/removeTest");
+  let params = {topicId: currentThemeId, testId: currentTestId};
+  url.search = new URLSearchParams(params).toString();
+  const response = await fetch(url);
+  const result = await response.json();
+  setNewThemeTests(result);
+}
 
 createNewTestForm.addEventListener('submit', (event) => {
   event.preventDefault();
   const formData = new FormData(createNewTestForm);
   const testName = formData.get('testName');
   const testDescription = formData.get('testDescription');
-  addNewTest(testName, testDescription);
-  editTest(testName, testDescription);
+  if (isNewTest) {
+    addNewTest(testName, testDescription);
+  } else {
+    editTest(testName, testDescription);
+  }
   createNewTestForm.reset();
 });
 
@@ -267,18 +276,23 @@ function setCreateTestFormStartData() {
   createNewTestForm.querySelector('[name=testDescription]').value = description;
 }
 
-function createTestClickHandler(target) {
+function createTestClickHandler(event) {
+  const { target, isTrusted } = event;
+  console.log(event)
   const openFormButton = target.closest('#createNewTestButton');
   if (openFormButton) {
     createNewTestForm.reset();
   }
-  if (!isNewTest) {
-    setCreateTestFormStartData()
+  if (!isTrusted) {
+    setCreateTestFormStartData();
+    isNewTest = false;
+  } else {
+    isNewTest = true;
   }
-  isNewTest = true;
 }
 
-document.addEventListener('click', ({ target }) => {
+document.addEventListener('click', (event) => {
+  const { target } = event;
   const targetClassList = target.classList;
   if (target.closest('#testThemes')) {
    testThemeClichHandler(target);
@@ -286,7 +300,7 @@ document.addEventListener('click', ({ target }) => {
   } else if (target.closest('.sidebar-add-theme')) {
     addThemeClickHandler(target);
   } else if (target.closest('.detail__create')) {
-    createTestClickHandler(target)
+    createTestClickHandler(event);
   }
   else if(target.closest('#detailList')) {
    refreshThemesValues();
@@ -327,15 +341,13 @@ let currentTestId = null;
 let currentQuestionId = null;
 let isNewTest = true;
 const createNewTestButton = document.getElementById('createNewTestButton');
-
-function openTestCreateForm(event) {
-  console.log('Test create')
-}
+const questionModalCloseButton = document.getElementById('questionModalCloseButton');
 
 async function addNewQuestion() {
   let data = null;
   let url = null;
   const formData = new FormData(createQuestionForm);
+  const questionName = formData.get('question');
   const answersData = Array.from(questionFormAnswerField.querySelectorAll('.answer')).map(answer => {
     return {
       correct: answer.querySelector('[name=correct]:checked') ? true : false,
@@ -344,31 +356,34 @@ async function addNewQuestion() {
   });
 
   if (isNewQuestion) {
-    console.log('New')
     url = '/addQuestion'
     data = {
+      questionName,
       topicId: currentThemeId,
       testId: currentTestId,
       answersData,
     }
   } else {
-    console.log('old')
     url = '/editQuestion'
     data = {
+      questionName,
       topicId: currentThemeId,
       questionId: currentQuestionId,
       answersData,
     }
   }
   isNewQuestion = false;
-  fetch(url, {
+  const response = await fetch(url, {
     method: 'POST',
     body: JSON.stringify(data),
-  })
+  });
+  const result = await response.json();
+  setNewThemeTests(result);
 }
 
 createQuestionForm.addEventListener('submit', (event) => {
   event.preventDefault();
+  questionModalCloseButton.click();
   addNewQuestion();
 })
 
@@ -412,7 +427,7 @@ function openQuestionEditForm( { questionId, description, answerDTOList }) {
 
 function getAnswers(questionId) {
   /*  const url = new URL('/getAnswers');
-  const params = {id};
+  const params = {id: questionId};
   url.search = new URLSearchParams(params).toString();
   response = await fetch(url);
   const result = await response.json(); */
@@ -436,16 +451,21 @@ function setCurrentQuestionId(target) {
   console.log('Set current questionId', currentQuestionId);
 }
 
+async function deleteQuestion(id) {
+  console.log('delete question')
+}
+
 function questionClickHandler(target) {
   if (target.closest('.question__edit-button')) {
     setCurrentQuestionId(target);
     editQuestion();
   } else if (target.closest('.question__delete-button')) {
-    console.log('delete')
+    deleteQuestion()
   }
 }
 
 function detailClickHandler(target) {
+  console.log()
   if (target.closest('.question__item')) {
     questionClickHandler(target);
   } 
@@ -471,9 +491,13 @@ function clickTestHandler(target) {
     target.closest('.test').classList.toggle('open');
   } else if (target.closest('.test__add-button')) {
     openQuestionCreateForm();
+    createQuestionForm.reset();
   }  else if (target.closest('.test__edit-button')) {
     isNewTest = false;
     createNewTestButton.click();
+  }
+  else if (target.closest('.test__delete-button')) {
+    deleteTest();
   }
 }
 
