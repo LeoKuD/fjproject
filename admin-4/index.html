@@ -38,57 +38,57 @@
   </header>
   <main>
     <section>
-        <div class="container">
-          <div class="row">
-            <div class="col-3 theme-sidebar">
-              <div class="d-flex sidebar-add-theme">
-                <span class="sidebar-add-theme__text">Themes</span>
-                <button class="sidebar-add-theme__button" id="activateAddThemeButton"><img class="button" src="./img/add-icon.svg" alt=""></button>
-              </div>
-              <form class="d-flex py-3 add-theme-form" id="addThemeForm" action="#">
-                <input class="col-auto add-theme-form__input" type="text" required>
-                <button class="col-auto add-theme-form__button" type="submit">
-                  <img src="./img/submit-icon.svg" alt="submit icon">
-                </button>
-              </form>
-              <div class="theme" id="testThemes">
-                <div class="theme__section">
-                  <div class="row theme__item theme-item" data-id="1">
-                    <input class="col theme-item__input" value="Java 2 Fundamentals" readonly>
-                    <span class="col-auto theme-item__control">
-                      <button class="theme-item__submit"><img src="./img/submit-icon.svg" alt=""></button>
-                      <button class="theme-item__edit"><img src="./img/edit-icon.svg" alt=""></button>
-                      <button class="theme-item__delete"><img src="./img/delete-icon.svg" alt=""></button>
-                    </span>
-                  </div>
-    
-                  <div class="row theme__item theme-item" data-id="1">
-                    <input class="col theme-item__input" value="Java Script" readonly>
-                    <span class="col-auto theme-item__control">
-                      <button class="theme-item__submit"><img src="./img/submit-icon.svg" alt=""></button>
-                      <button class="theme-item__edit"><img src="./img/edit-icon.svg" alt=""></button>
-                      <button class="theme-item__delete"><img src="./img/delete-icon.svg" alt=""></button>
-                    </span>
-                  </div>
-                  
+      <div class="container">
+        <div class="row">
+          <div class="col-3 theme-sidebar">
+            <div class="d-flex sidebar-add-theme">
+              <span class="sidebar-add-theme__text">Themes</span>
+              <button class="sidebar-add-theme__button" id="activateAddThemeButton"><img class="button" src="./img/add-icon.svg" alt=""></button>
+            </div>
+            <form class="d-flex py-3 add-theme-form" id="addThemeForm" action="#">
+              <input class="col-auto add-theme-form__input" type="text" required>
+              <button class="col-auto add-theme-form__button" type="submit">
+                <img src="./img/submit-icon.svg" alt="submit icon">
+              </button>
+            </form>
+            <div class="theme" id="testThemes">
+              <div class="theme__section">
+                <div class="row theme__item theme-item" data-id="1">
+                  <input class="col theme-item__input" value="Java 2 Fundamentals" readonly>
+                  <span class="col-auto theme-item__control">
+                    <button class="theme-item__submit"><img src="./img/submit-icon.svg" alt=""></button>
+                    <button class="theme-item__edit"><img src="./img/edit-icon.svg" alt=""></button>
+                    <button class="theme-item__delete"><img src="./img/delete-icon.svg" alt=""></button>
+                  </span>
                 </div>
+  
+                <div class="row theme__item theme-item" data-id="2">
+                  <input class="col theme-item__input" value="Java Script" readonly>
+                  <span class="col-auto theme-item__control">
+                    <button class="theme-item__submit"><img src="./img/submit-icon.svg" alt=""></button>
+                    <button class="theme-item__edit"><img src="./img/edit-icon.svg" alt=""></button>
+                    <button class="theme-item__delete"><img src="./img/delete-icon.svg" alt=""></button>
+                  </span>
+                </div>
+                
               </div>
             </div>
-    
-            <div class="col-9 detail" id="detail">
-              <h2 class="text-start detail__title">Java 2 Fundamentals</h2>
-              <div class="align-items-center detail__create">
-                    <button type="button" class="row detail-card__add-button" id="createNewTestButton" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                      <img class="col-auto" src="./img/add-icon.svg" alt="add new test">
-                      <span class="col-auto detail-card__text">Create new test</span>
-                    </button>
-              </div>
-              <h3 class="detail__list-title">List of tests</h3>
-                <div class="detail__list" id="detailList">
-                  
-                </div>
+          </div>
+  
+          <div class="col-9 detail" id="detail">
+            <h2 class="text-start detail__title">Java 2 Fundamentals</h2>
+            <div class="align-items-center detail__create">
+                  <button type="button" class="row detail-card__add-button" id="createNewTestButton" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <img class="col-auto" src="./img/add-icon.svg" alt="add new test">
+                    <span class="col-auto detail-card__text">Create new test</span>
+                  </button>
             </div>
-        </div>
+            <h3 class="detail__list-title">List of tests</h3>
+              <div class="detail__list" id="detailList">
+                
+              </div>
+          </div>
+      </div>
     </section>
   </main>
   <footer class="footer">
