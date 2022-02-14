@@ -102,6 +102,11 @@ let prevEditedTheme = null;
 let prevEditedThemeValue = null;
 let currentThemeId = null;
 const themeSection = document.querySelector('.theme__section');
+const detailTitle = document.querySelector('.detail__title');
+
+function setThemeTitle(newName) {
+  detailTitle.textContent = newName;
+}
 
 function changeActiveAddThemeFormStatus() {
   addThemeForm.classList.toggle('active');
@@ -144,6 +149,7 @@ async function getTestsData(themeId) {
 }
 
 async function setNewThemeTests(data) {
+  console.log
   let testsData;
   if (data) {
     testsData = data;
@@ -161,7 +167,6 @@ async function setNewThemeTests(data) {
 /* topicData = [{"topicName":"Second topic","topicId":2},{"topicName":"Third name","topicId":3},{"topicName":"name","topicId":6},{"topicName":"name1","topicId":7},{"topicName":"JavaTopic","topicId":8},{"topicName":"First topics","topicId":1},{"topicName":"DOTNET","topicId":9}]; */
 
 function updateThemesList(data) {
-  console.log(data)
   themeSection.innerHTML = '';
   themeSection.innerHTML = `
     ${data.map( ({ topicName, topicId }) => {
@@ -202,7 +207,9 @@ async function deleteTheme(target) {
   updateThemesList(result);
 }
 
-function testThemeClichHandler(target) {
+function testThemeClichHandler(event) {
+  event.preventDefault();
+  const { target } = event;
   const themeItem = target.closest('.theme-item');
   if (themeItem) {
     const themeId = themeItem.dataset.id;
@@ -210,6 +217,8 @@ function testThemeClichHandler(target) {
       if (themeId !== currentThemeId) {
         detail.classList.remove('active');
         currentThemeId = themeId;
+        const themeName = themeItem.querySelector('.theme-item__input').value;
+        setThemeTitle(themeName);
         setNewThemeTests();
       }
     } else if (target.closest('.theme-item__edit')) {
@@ -278,7 +287,6 @@ function setCreateTestFormStartData() {
 
 function createTestClickHandler(event) {
   const { target, isTrusted } = event;
-  console.log(event)
   const openFormButton = target.closest('#createNewTestButton');
   if (openFormButton) {
     createNewTestForm.reset();
@@ -295,7 +303,7 @@ document.addEventListener('click', (event) => {
   const { target } = event;
   const targetClassList = target.classList;
   if (target.closest('#testThemes')) {
-   testThemeClichHandler(target);
+   testThemeClichHandler(event);
    deactivateAddThemeForm();
   } else if (target.closest('.sidebar-add-theme')) {
     addThemeClickHandler(target);
@@ -350,7 +358,7 @@ async function addNewQuestion() {
   const questionName = formData.get('question');
   const answersData = Array.from(questionFormAnswerField.querySelectorAll('.answer')).map(answer => {
     return {
-      correct: answer.querySelector('[name=correct]:checked') ? true : false,
+      correct: answer.querySelector('[name=correct]:cgit cked') ? true : false,
       answer: answer.querySelector('[name=answer]').value,
     }
   });

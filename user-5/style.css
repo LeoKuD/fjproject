@@ -39,6 +39,10 @@ main {
   color: #FAFAFA;
 }
 
+.nav-control {
+  gap: 0 5px;
+}
+
 .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
   color: #17AC19;
 }
@@ -107,7 +111,7 @@ button {
   position: relative;
   padding: 18px 20px;
   display: grid;
-  grid-template-columns: 1fr 150px 150px;
+  grid-template-columns: 30px 1fr 150px 150px;
   border-bottom: 1px solid #DBDBDB;
 }
 
@@ -152,12 +156,12 @@ button {
 
 .question__head-row {
   display: grid;
-  grid-template-columns: 1fr repeat(2, 150px);
+  grid-template-columns: 30px 1fr repeat(2, 150px);
 }
 
 .question__item {
   display: grid;
-  grid-template-columns: auto 1fr repeat(2, 150px);
+  grid-template-columns: 30px 1fr repeat(2, 150px);
 }
 
 .question__head-text {
@@ -173,12 +177,4 @@ button {
   border-radius: 10px;
   line-height: 18px;
   color: #777777;
-}
-
-.data-container {
-  display: none;
-}
-
-.data-container.active {
-  display: block;
 }
